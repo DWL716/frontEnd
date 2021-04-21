@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>函数截流</title>
+</head>
+
+<body>
+    <div id="show">0</div>
+    <button id="btn">click</button>
+    <script>
+        var oDiv = document.getElementById('show')
+        var oBtn = document.getElementById('btn')
+
+        function throttle(handler, wait) { // handler为函数  wait为时间
+            var lastTime = 0
+            return function() {
+                var nowTime = new Date().getTime() //获取时间
+                if (nowTime - lastTime > wait) { // 判断当前单击和上次单击的时间是否超过规定的时间
+                    handler.apply(this, arguments)
+                    lastTime = nowTime // 执行后将上次时间进行更新
+                }
+            }
+        }
+
+        function buy(e) { //需要执行的函数
+            console.log(this, e)
+            oDiv.innerText = parseInt(oDiv.innerText) + 1
+        }
+        oBtn.onclick = throttle(buy, 1000)
+    </script>
+</body>
+
+</html>

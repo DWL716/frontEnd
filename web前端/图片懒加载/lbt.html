@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>图片懒加载</title>
+    <style>
+      .wrap {
+        width: 400px;
+        height: 200px;
+        position: relative;
+        overflow: hidden;
+      }
+      .wrap > ul {
+        position: absolute;
+        white-space: nowrap;
+      }
+      .wrap li {
+        display: inline-block;
+      }
+      img {
+        width: 256px;
+        height: 192px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <div id="wrap" class="wrap">
+      <ul>
+        <li><img src="https://demo.cssworld.cn/images/common/l/1.jpg" /></li>
+        <li><img src="https://demo.cssworld.cn/images/common/l/1.jpg" /></li>
+        <li><img src="https://demo.cssworld.cn/images/common/l/1.jpg" /></li>
+        <li><img src="https://demo.cssworld.cn/images/common/l/1.jpg" /></li>
+        <li><img src="https://demo.cssworld.cn/images/common/l/1.jpg" /></li>
+      </ul>
+    </div> -->
+    <div id='img'>
+      <div id="s1">
+        <img src="https://demo.cssworld.cn/images/common/l/1.jpg">
+      </div>
+    </div>
+  </body>
+  <!-- <script src="https://demo.cssworld.cn/js/3/iscroll.js"></script> -->
+  <script src="file:///Users/dengwenlong/Desktop/%E5%89%8D%E7%AB%AF%E7%BB%83%E4%B9%A0%E6%80%BB/iscroll/build/iscroll-zoom.js"></script>
+
+  <script>
+    // new IScroll("#wrap", {
+    //   scrollbars: true,
+    //   scrollX: true,
+    //   scrollY: false,
+    // });
+    document.getElementById('img').addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    var myScroll1 = new IScroll('#s1', {
+      zoom: true,
+    mouseWheel: true,
+    wheelAction: 'zoom'
+    });
+  </script>
+  <script src="https://demo.cssworld.cn/common/js/all.js"></script>
+</html>

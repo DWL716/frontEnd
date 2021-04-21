@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>函数记忆</title>
+</head>
+
+<body>
+    <script>
+        // 用n的阶乘来演示
+        // n! n*(n-1)*....*2*1
+        // 0! = 1
+        // n! = n*(n-1)!
+
+        // 实现记忆前
+        // var count = 0
+
+        // function factorial(n) {
+        //     count++
+        //     if (n == 0 || n == 1) {
+        //         return 1
+        //     }
+        //     return n * factorial(n - 1)
+        // }
+        // for (var i = 1; i <= 5; i++) {
+        //     console.log(factorial(i))
+        // }
+
+
+
+        // 实现记忆后
+        // var count = 0
+        // var cache = []
+
+        // function factorial(n) {
+        //     count++
+        //     if (cache[n]) {
+        //         return cache[n]
+        //     } else {
+        //         if (n == 0 || n == 1) {
+        //             cache[0] = 1
+        //             cache[1] = 1
+        //             return 1
+        //         } else {
+        //             cache[n] = n * factorial(n - 1)
+        //             return cache[n]
+        //         }
+        //     }
+        // }
+
+        // console.time('3')
+        // console.log(factorial(3))
+        // console.timeEnd('3')
+        // console.log('=================')
+        // console.time('4')
+        // console.log(factorial(4))
+        // console.timeEnd('4')
+        function factorialttt(n) {
+            if (n == 0 || n == 1) {
+                return 1
+            } else {
+                return n * factorial(n - 1)
+            }
+        }
+        // 优化
+        function factorial(n) {
+            if (n == 0 || n == 1) {
+                return 1
+            } else {
+                return n * factorial(n - 1)
+            }
+        }
+        // 封装函数
+        function memorize(fn) {
+            var cache = {} // 用对象来存储值
+            return function() {
+                var key = arguments.length + Array.prototype.join.call(arguments) //实现key的唯一标识
+                if (cache[key]) {
+                    return cache[key]
+                } else { // 利用argumens来获取形参的类数组
+                    cache[key] = fn.apply(this, arguments)
+                    return cache[key]
+                }
+            }
+        }
+        var newF = memorize(factorial)
+
+        console.time('aa')
+        console.log(factorialttt(5))
+        console.timeEnd('aa')
+        console.time('5')
+        console.log(newF(5))
+        console.timeEnd('5')
+        console.time('6')
+        console.log(newF(6))
+        console.timeEnd('6')
+    </script>
+</body>
+
+</html>

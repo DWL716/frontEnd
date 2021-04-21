@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>纯函数</title>
+  </head>
+  <body>
+    <script>
+      function isObject(obj) {
+        return typeof obj === "object" && obj != null;
+      }
+
+      const deepClone = (source, hash = new WeakMap()) => {
+        if (!isObject(source)) return source;
+        if (hash.has(source)) return has.get(source);
+        const target = Array.isArray(source) ? [] : {};
+        hash.set(source, target);
+        for (key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = deepClone(source[key], hash);
+          }
+        }
+        return target;
+      };
+
+      
+      var arrs = [{ name: "123" }];
+      function add(_arr) {
+        var obj = { name: "cst" };
+        var newArrs = [];
+        for (var i = 0; i < _arr.length; i++) {
+          newArrs[i] = deepClone(_arr[i]);
+        }
+        newArrs.push(obj);
+        return newArrs;
+      }
+    </script>
+  </body>
+</html>

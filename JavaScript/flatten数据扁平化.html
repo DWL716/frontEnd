@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数据扁平化</title>
+</head>
+
+<body>
+    <script>
+        var arrs = ['dg', 'cg', 2, 3, [4, 5, 6, [7, 8, 9, [
+                [
+                    [
+                        [
+                            [123]
+                        ]
+                    ], null, {},
+                    [
+                        [1, 2, 3, [4]]
+                    ]
+                ]
+            ]]], null, [], {},
+            [
+                [1]
+            ]
+        ]
+        var res = ['dg', 'cg', 2, 3, 4, 5, 6, 7, 8, 9, 123, null, {}, 1, 2, 3, 4, null, {}, 1]
+
+        // 
+        var testArr = [1, 2, [3, 4]] // [1,2].concat([3,4])
+
+        // 判断是否为数组
+        function isArray(obj) {
+            return Object.prototype.toString.call(obj) == '[object Array]'
+        }
+        // 判断是否为对象
+        function isObject(obj) {
+            return Object.prototype.toString.call(obj) == '[object Object]'
+        }
+
+        function flatten(arr) {
+            let arrs = arr || [],
+                resArr = [],
+                len = arrs.length
+            for (let i = 0; i < len; i++) {
+                if (isArray(arr[i])) {
+                    // 进行递归
+                    resArr = resArr.concat(flatten(arrs[i]))
+                } else {
+                    resArr.push(arrs[i])
+                }
+            }
+            return resArr
+        }
+
+        // 优化版本 弄到Array的原型链上
+        Array.prototype.flatten = function() {
+            var resArr = []
+            this.forEach(function(item) {
+                Object.prototype.toString.call(item) == '[object Array]' ? resArr = resArr.concat(item.flatten()) : resArr.push(item)
+            })
+            return resArr
+        }
+        arrs.flatten()
+
+        // 第三版本 用ES6的 reduce方法来实现
+        function flatten3(arr) {
+            var arr = arr || []
+            return arr.reduce(function(prev, next) {
+                return Object.prototype.toString.call(next) == '[object Array]' ? prev.concat(flatten3(next)) : prev.concat(next)
+            }, [])
+        }
+    </script>
+</body>
+
+</html>

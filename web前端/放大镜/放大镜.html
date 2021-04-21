@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>放大镜</title>
+    <style>
+        * {
+            margin: 0;
+        }
+        
+        .wrapper {
+            height: 500px;
+            width: 500px;
+            border: 1px solid black;
+            position: relative;
+        }
+        
+        .imgCont {
+            height: 100%;
+            width: 100%;
+        }
+        
+        .img {
+            height: 100%;
+            width: 100%;
+            background: url(./o_l2m.png) 50% 50% no-repeat;
+            /* background-size: 600px 500px; */
+        }
+        
+        .moveBox {
+            position: absolute;
+            cursor: move;
+            background-color: #eee;
+            opacity: 0.3;
+            z-index: 999;
+        }
+        
+        .bigImg {
+            width: 500px;
+            height: 500px;
+            position: absolute;
+            top: 0;
+            left: 105%;
+            border: 1px solid black;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="imgCont">
+            <div class="img"></div>
+            <div class="moveBox"></div>
+        </div>
+        <div class="bigImg"></div>
+    </div>
+</body>
+
+</html>

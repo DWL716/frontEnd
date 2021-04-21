@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>函数组合应用</title>
+</head>
+
+<body>
+    <script>
+        // 1.0
+        // function compose(f, g) {
+        //     return function(x) {
+        //         return f(g(x))
+        //     }
+        // }
+
+        // function toUpperCase(str) {
+        //     return str.toUpperCase()
+        // }
+
+        // function add(str) {
+        //     return str + '!'
+        // }
+
+        // var f = compose(add, toUpperCase)
+
+        // 2。0
+        function toUpperCase(str) {
+            return str.toUpperCase()
+        }
+
+        function add(str) {
+            return str + '!'
+        }
+
+        function compose() {
+            var args = Array.prototype.slice.call(arguments) // 将类数组变成数组
+            var len = args.length - 1 // 每次获取数组最后一位
+            return function(x) {
+                var result = args[len](x)
+                while (len--) { //循环遍历出compose内的函数进行调用
+                    result = args[len](result)
+                }
+                return result
+            }
+
+        }
+        var f = compose(add, toUpperCase)
+
+        function compose3() {
+            var args = Array.prototype.slice.call(arguments)
+            return function(x) {
+                return args.reduceRight(function(res, cb) {
+                    return cb(res)
+                }, x)
+            }
+        }
+        var f3 = compose3(add, toUpperCase)
+    </script>
+</body>
+
+</html>

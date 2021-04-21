@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>惰性函数</title>
+</head>
+
+<body>
+    <script>
+        // 关键在于重写函数的思想来实现惰性函数
+        var test = function() {
+            var t = new Date().getTime()
+            test = function() {
+                return t
+            }
+            return test()
+        }
+    </script>
+</body>
+
+</html>
