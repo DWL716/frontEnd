@@ -3,7 +3,6 @@ const fs = require('fs');
 // 流的方式读取
 const reader = fs.createReadStream("./txt/foo.txt", {
   start: 0,
-  end: 1000000,
   highWaterMark: 1
 });
 
